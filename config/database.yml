@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: Budget_app_development
-  username: postgresql
+  username: postgres
   password: Charles44..
   host: localhost
 
@@ -61,7 +61,7 @@ development:
 test:
   <<: *default
   database: Budget_app_test
-  username: postgresql
+  username: postgres
   password: Charles44..
   host: localhost
 
