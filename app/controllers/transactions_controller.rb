@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def new
     @transaction = Transaction.new
@@ -22,7 +22,8 @@ class TransactionsController < ApplicationController
     end
 
     if @transaction.save
-      redirect_to category_transaction_path(@transaction.categories.first.id), notice: 'Transactions added successfully'
+      redirect_to category_transaction_path(@transaction.categories.first.id),
+                  notice: 'Transactions added successfully'
     else
       render :new
     end
