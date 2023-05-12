@@ -16,6 +16,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(name: params[:name], amount: params[:amount])
     @transaction.author = current_user
     @categories_id = params[:ids]
+    
     @categories_id.each do |id|
       category = Category.find(id) unless id == ''
       @transaction.categories.push(category) unless category.nil?
