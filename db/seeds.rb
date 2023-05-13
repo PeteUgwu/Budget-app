@@ -9,8 +9,8 @@ include Devise::Controllers::Helpers
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-first_user = User.new({ full_name: 'Trust', email: 'test1@test.com', password: '123456', password_confirmation: '123456' })
-second_user = User.new({ full_name: 'Valentine', email: 'test2@test.com', password: '123456', password_confirmation: '123456' })
+first_user = User.new({ full_name: 'Trust', email: 'test11@test.com', password: '123456', password_confirmation: '123456' })
+second_user = User.new({ full_name: 'Valentine', email: 'test22@test.com', password: '123456', password_confirmation: '123456' })
 
 # Generate the confirmation token and set the confirmed at timestamp first user
 confirmation_token = Devise.token_generator.generate(User, :confirmation_token)
@@ -36,7 +36,7 @@ end
 first_category = Category.create({name: 'Sport', icon: 'https://cdn-icons-png.flaticon.com/512/2112/2112215.png', user_id: 1})
 second_category = Category.create({name: 'Entertainment', icon: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', user_id: 1})
 
-Transaction.create([
+Transact.create([
     {name: 'PS4', amount: 250, author_id: 1, categories: [first_category]},
     {name: 'Xbox', amount: 75, author_id: 1, categories: [first_category]}
 ])
