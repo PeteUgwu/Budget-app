@@ -1,0 +1,18 @@
+databases:
+  - name: my_datab
+    databaseName: capstone_rails_14tj
+    user: pete
+
+services:
+  - type: web
+    name: transactions-pal
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: capstone_rails_14tj
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
