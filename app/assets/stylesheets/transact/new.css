@@ -1,11 +1,11 @@
-.expense-new {
+.transact-new {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.create-new-expense-form {
+.create-new-transact-form {
   display: flex;
   flex-direction: column;
   border: solid 1px #173f4e;
@@ -16,7 +16,7 @@
   padding: 1rem 0;
 }
 
-.create-new-expense-form .field {
+.create-new-transact-form .field {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,14 +24,14 @@
   gap: 0;
 }
 
-.create-new-expense-form .field .amount-input {
+.create-new-transact-form .field .amount-input {
   background: none;
   border: 1px solid #1463f3;
   border-radius: 8px;
   padding: 0.5rem;
 }
 
-.create-new-expense-form .field .name-input {
+.create-new-transact-form .field .name-input {
   background: none;
   border: 1px solid #1463f3;
   border-radius: 8px;
@@ -43,24 +43,9 @@
   margin: 0 25%;
   border-radius: 10px;
   height: 8rem;
-  overflow-y: scroll;
 }
 
-.cat-select-field::-webkit-scrollbar {
-  width: 0.4rem;
-}
-
-.cat-select-field::-webkit-scrollbar-track {
-  background: #5fb523;
-}
-
-.cat-select-field::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 20px;
-  border: 3px solid orange;
-}
-
-.Submit-expense-btn {
+.Submit-transaction-btn {
   align-self: center;
   background: #5fb523;
   width: 12rem;
@@ -71,6 +56,6 @@
   color: white;
 }
 
-.Submit-expense-btn:hover {
+.Submit-transaction-btn:hover {
   background: #434b54;
 }
