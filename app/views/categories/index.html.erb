@@ -20,7 +20,11 @@
                         <%= category.created_at.strftime("%d %b %Y") %>
                     </span>
                 </div>
-               
+                <div class="category-total-amount">
+                        <Span>
+                            $<%= category.transacts.inject(0) { |sum, e| sum += e.amount  }%> 
+                        </Span>
+                    </div>
             </div>
             <% end %>
             <%= link_to 'Add Category', new_category_path, class: 'add-new-category-btn' %>
