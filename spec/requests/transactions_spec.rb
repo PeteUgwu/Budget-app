@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Transact', type: :request do
   describe 'GET /index' do
-    
     before do
       current_user = User.first
       first_category = Category.first

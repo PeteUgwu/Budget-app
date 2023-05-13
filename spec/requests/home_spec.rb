@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'home', type: :request do
   describe 'GET /index' do
-    
     before do
       get '/'
     end
