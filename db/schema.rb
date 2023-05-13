@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_084207) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_132131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,20 +23,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_084207) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "categories_transactions", id: false, force: :cascade do |t|
-    t.bigint "transaction_id", null: false
+  create_table "categories_transacts", id: false, force: :cascade do |t|
+    t.bigint "transact_id", null: false
     t.bigint "category_id", null: false
-    t.index ["category_id", "transaction_id"], name: "index_categories_transactions_on_category_id_and_transaction_id"
-    t.index ["transaction_id", "category_id"], name: "index_categories_transactions_on_transaction_id_and_category_id"
+    t.index ["category_id", "transact_id"], name: "index_categories_transacts_on_category_id_and_transact_id"
+    t.index ["transact_id", "category_id"], name: "index_categories_transacts_on_transact_id_and_category_id"
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "transacts", force: :cascade do |t|
     t.string "name"
     t.decimal "amount"
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_transactions_on_author_id"
+    t.index ["author_id"], name: "index_transacts_on_author_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,10 +51,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_084207) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "categories", "users"
-  add_foreign_key "transactions", "users", column: "author_id"
+  add_foreign_key "transacts", "users", column: "author_id"
 end

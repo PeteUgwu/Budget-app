@@ -1,0 +1,38 @@
+<%= link_to 'Back', "/", class: "back-btn" %>
+<div>
+    <h3>Transactions</h3>
+    <div>
+        <span>
+            <%= @category.name %>
+        </span>
+        <Span>
+            $<%= @transacts.inject(0) { |sum, e| sum += e.amount  }%> 
+        </Span>
+        <div>
+            <% @transacts.each do |transact| %>
+                <div>
+                    <div>
+                        <%= image_tag(@category.icon || '', class: "category_image") %>
+                    </div>
+                    <div>
+                        <h2>
+                            <%= transact.name %>
+                        </h2>
+                        <span>
+                            <%= transact.created_at.strftime("%d %b %Y") %>
+                        </span>
+                    </div>
+                    <div>
+                        <Span>
+                            $<%= transact.amount %> 
+                        </Span>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+    <%= link_to 'Add new transaction', new_category_transaction_path, class: 'add-new-transaction-btn' %>
+
+
+</div>
