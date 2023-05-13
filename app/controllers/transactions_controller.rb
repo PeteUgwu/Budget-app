@@ -2,29 +2,31 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @transaction = Transaction.new
+    @transact = Transact.new
     @categories = Category.created_by_current_user(current_user)
   end
 
   def index
-    @transactions = Transaction.joins(:categories).where(categories: { id: params[:category_id] }).order(created_at: :desc)
+    @transacts = Transact.all
     @category = Category.find(params[:category_id])
   end
 
   def create
-    params = transaction_params
-    @transaction = Transaction.new(name: params[:name], amount: params[:amount])
-    @transaction.author = current_user
-    @categories_id = params[:ids]
+    params = transact_params
+    @transact = Transact.new(params)
+    @transact.author = current_user
+    @categories_ids = params[:categories_ids]
     
-    @categories_id.each do |id|
+    if @categories_ids
+    @categories_ids.each do |id|
       category = Category.find(id) unless id == ''
-      @transaction.categories.push(category) unless category.nil?
+      @transact.categories.push(category) unless category.nil?
     end
+  end
 
-    if @transaction.save
-      redirect_to category_transaction_path(@transaction.categories.first.id),
-                  notice: 'Transactions added successfully'
+    if @transact.save
+      category_id = @transact.categories.first.id if @transact.categories.first
+      redirect_to category_transactions_path(category_id), notice: 'Transaction added successfully'
     else
       render :new
     end
@@ -32,8 +34,8 @@ class TransactionsController < ApplicationController
 
   private
 
-  def transaction_params
-    params.require(:transaction).permit(:name, :amount, ids: [])
+  def transact_params
+    params.require(:transact).permit(:name, :amount, category_ids: [])
   end
 
   def create_general_category

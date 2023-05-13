@@ -6,25 +6,25 @@
             <%= @category.name %>
         </span>
         <Span>
-            $<%= @transactions.inject(0) { |sum, e| sum += e.amount  }%> 
+            $<%= @transacts.inject(0) { |sum, e| sum += e.amount  }%> 
         </Span>
         <div>
-            <% @transactions.each do |transaction| %>
+            <% @transacts.each do |transact| %>
                 <div>
                     <div>
                         <%= image_tag(@category.icon || '', class: "category_image") %>
                     </div>
                     <div>
                         <h2>
-                            <%= transaction.name %>
+                            <%= transact.name %>
                         </h2>
                         <span>
-                            <%= transaction.created_at.strftime("%d %b %Y") %>
+                            <%= transact.created_at.strftime("%d %b %Y") %>
                         </span>
                     </div>
                     <div>
                         <Span>
-                            $<%= transaction.amount %> 
+                            $<%= transact.amount %> 
                         </Span>
                     </div>
                 </div>
