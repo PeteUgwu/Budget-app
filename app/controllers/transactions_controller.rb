@@ -16,13 +16,11 @@ class TransactionsController < ApplicationController
     @transact = Transact.new(params)
     @transact.author = current_user
     @categories_ids = params[:categories_ids]
-    
-    if @categories_ids
-    @categories_ids.each do |id|
+
+    @categories_ids&.each do |id|
       category = Category.find(id) unless id == ''
       @transact.categories.push(category) unless category.nil?
     end
-  end
 
     if @transact.save
       category_id = @transact.categories.first.id if @transact.categories.first
