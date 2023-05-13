@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Transaction, type: :model do
+RSpec.describe Transact, type: :model do
   current_user = User.first
   first_category = Category.first
 
   subject do
-    Expense.new({ name: 'PS4', amount: 250, author: current_user, categories: [first_category] })
+    Transact.new({ name: 'PS4', amount: 250, author: current_user, categories: [first_category] })
   end
 
   before { subject.save }

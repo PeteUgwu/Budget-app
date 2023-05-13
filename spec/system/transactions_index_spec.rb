@@ -3,61 +3,61 @@ require 'capybara/rspec'
 
 base_url = 'http://localhost:3000'
 
-RSpec.feature 'Expenses#index view', type: :feature, js: true do
+RSpec.feature 'Transacts#index view', type: :feature, js: true do
   before(:each) do
     @current_user = User.first
     @current_user.confirm if @current_user.confirmed_at.nil?
     @category = Category.created_by_current_user(@current_user).last
-    @expenses = Expense.joins(:categories).where(categories: { id: @category.id }).order(created_at: :desc)
-    @expense = @expenses.first
+    @transacts = Transact.joins(:categories).where(categories: { id: @category.id }).order(created_at: :desc)
+    @transact = @transacts.first
 
-    visit "#{base_url}/categories/#{@category.id}/expenses"
+    visit "#{base_url}/categories/#{@category.id}/transacts"
     fill_in 'Email', with: @current_user.email
     fill_in 'Password', with: '123456'
     click_button 'Log in'
   end
 
-  scenario "Displaying at least one expense's name" do
+  scenario "Displaying at least one transact's name" do
     # Wait until the recipe name appears on the page
-    expect(page).to have_content(@expense.name, wait: 5)
+    expect(page).to have_content(@transact.name, wait: 5)
 
     # Now make the assertion
-    expect(body).to have_content(@expense.name)
+    expect(body).to have_content(@transact.name)
   end
 
-  scenario "Displaying Category's expenses total amount" do
-    total_expense = @expenses.inject(0) { |sum, e| sum + e.amount }
+  scenario "Displaying Category's transacts total amount" do
+    total_transact = @transacts.inject(0) { |sum, e| sum + e.amount }
     # Wait until the recipe name appears on the page
-    expect(page).to have_content(total_expense, wait: 5)
+    expect(page).to have_content(total_transact, wait: 5)
 
     # Now make the assertion
-    expect(body).to have_content(total_expense)
+    expect(body).to have_content(total_transact)
   end
 
-  scenario 'Displaying button link to create new Expense' do
+  scenario 'Displaying button link to create new Transact' do
     # wait
-    expect(page).to have_css('.add-new-expense-btn', wait: 5)
+    expect(page).to have_css('.add-new-transaction-btn', wait: 5)
     # Make Assertion
-    expect(page).to have_css('.add-new-expense-btn')
+    expect(page).to have_css('.add-new-transaction-btn')
   end
 end
 
-RSpec.feature 'Expenses#index view', type: :feature, js: true do
+RSpec.feature 'Transacts#index view', type: :system, js: true do
   before(:each) do
     @current_user = User.first
     @current_user.confirm if @current_user.confirmed_at.nil?
     @category = Category.created_by_current_user(@current_user).last
-    @expenses = Expense.joins(:categories).where(categories: { id: @category.id }).order(created_at: :desc)
-    @expense = @expenses.first
+    @transacts = Transact.joins(:categories).where(categories: { id: @category.id }).order(created_at: :desc)
+    @transact = @transacts.first
 
-    visit "#{base_url}/categories/#{@category.id}/expenses"
+    visit "#{base_url}/categories/#{@category.id}/transacts"
     fill_in 'Email', with: @current_user.email
     fill_in 'Password', with: '123456'
     click_button 'Log in'
   end
-  scenario 'Clicking on the add new category button redirects to /categories/:category_id/expenses/new' do
-    add_btn = page.all(:css, '.add-new-expense-btn').first
-    expected_url = "#{base_url}/categories/#{@category.id}/expenses/new"
+  scenario 'Clicking on the add new category button redirects to /categories/:category_id/transacts/new' do
+    add_btn = page.all(:css, '.add-new-transaction-btn').first
+    expected_url = "#{base_url}/categories/#{@category.id}/transacts/new"
 
     add_btn.click
     expect(page).to have_current_path(expected_url)

@@ -7,7 +7,7 @@ RSpec.feature 'Categories#index view', type: :feature, js: true do
   before(:each) do
     @current_user = User.first
     @current_user.confirm if @current_user.confirmed_at.nil?
-    @category = Category.created_by_current_user(@current_user).first
+    @category = Category.all
 
     visit "#{base_url}/categories"
     fill_in 'Email', with: @current_user.email
@@ -32,9 +32,9 @@ RSpec.feature 'Categories#index view', type: :feature, js: true do
     expect(page).to have_current_path(expected_url)
   end
 
-  scenario 'Clicking on a category item redirects to /categories/:category_id/expenses' do
+  scenario 'Clicking on a category item redirects to /categories/:category_id/transacts' do
     cat_item = page.all(:css, '.category-name').first
-    expected_url = "#{base_url}/categories/#{@category.id}/expenses"
+    expected_url = "#{base_url}/categories/#{@category.id}/transacts"
     cat_item.click
     expect(page).to have_current_path(expected_url)
   end
