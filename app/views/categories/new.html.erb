@@ -1,8 +1,8 @@
-<%= link_to 'Back', "/" %>
-
+<%= render "shared/back" %>
+<div class="category-new">
 <h2>New Category</h2>
 
-<%= form_with(model: Category, url: categories_path, method: :post) do |f| %>
+<%= form_with(model: Category, url: categories_path, method: :post, class: 'create-new-category-form') do |f| %>
 
     <div class="field">
         <%= f.label :name %>
@@ -17,3 +17,4 @@
 
     <%= f.submit 'Save', class: 'Submit-btn' %> <br>
 <% end %>
+</div>

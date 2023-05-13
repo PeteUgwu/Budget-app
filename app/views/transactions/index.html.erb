@@ -1,38 +1,44 @@
-<%= link_to 'Back', "/", class: "back-btn" %>
-<div>
-    <h3>Transactions</h3>
-    <div>
-        <span>
+<%= render "shared/back" %>
+<div class="transacts-main-div">
+    <h3 class="transacts-main-title">Transactions</h3>
+    <% if @transacts.empty? %>
+    <div class="empty-transacts">
+        <h3>You have not added any Transacts yet to the <%= @category.name %> Category</h3>
+        <%= link_to 'Add new transacts', new_category_transaction_path %>
+    </div>
+<% else %>
+    <div class="transacts-category-total">
+        <span class="ex-cat-name">
             <%= @category.name %>
         </span>
         <Span>
             $<%= @transacts.inject(0) { |sum, e| sum += e.amount  }%> 
         </Span>
-        <div>
-            <% @transacts.each do |transact| %>
-                <div>
-                    <div>
-                        <%= image_tag(@category.icon || '', class: "category_image") %>
-                    </div>
-                    <div>
-                        <h2>
-                            <%= transact.name %>
-                        </h2>
-                        <span>
-                            <%= transact.created_at.strftime("%d %b %Y") %>
-                        </span>
-                    </div>
-                    <div>
-                        <Span>
-                            $<%= transact.amount %> 
-                        </Span>
-                    </div>
-                </div>
-            <% end %>
-        </div>
     </div>
+    <div class="transacts-section">
+        <% @transacts.each do |transact| %>
+            <div class="transact-section">
+                <div>
+                    <%= image_tag(@category.icon || '', class: "transacts_image") %>
+                </div>
+                <div  class="transacts-name-div">
+                    <h2>
+                        <%= transact.name %>
+                    </h2>
+                    <span>
+                        <%= transact.created_at.strftime("%d %b %Y") %>
+                    </span>
+                </div>
+                <div  class="transacts-total-amount">
+                    <Span>
+                        $<%= transact.amount %> 
+                    </Span>
+                </div>
 
-    <%= link_to 'Add new transaction', new_category_transaction_path, class: 'add-new-transaction-btn' %>
-
+                    </div>
+                    <% end %>
+                    </div>
+                <%= link_to 'Add new transaction', new_category_transaction_path, class: 'add-new-transaction-btn' %>
+            <% end %>
 
 </div>
