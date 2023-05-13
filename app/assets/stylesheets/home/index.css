@@ -44,3 +44,8 @@
 .nav-sign-in-btn:hover {
   background: #434b54;
 }
+
+.harmburger-menu {
+  width: 2rem;
+  height: 2rem;
+}
